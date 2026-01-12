@@ -5,6 +5,9 @@ import Features from '../components/Home/Features.vue';
 import Choose from '../components/Home/Choose.vue';
 import Comm from '../components/Home/Comm.vue';
 import Pricing from '../components/Home/Pricing.vue';
+import FAQ from '../components/Home/FAQ.vue';
+import Subscribe from '../components/Home/Subscribe.vue';
+import Footer from '../components/Footer.vue';
 </script>
 
 
@@ -15,4 +18,7 @@ import Pricing from '../components/Home/Pricing.vue';
     <Choose />
     <Comm />
     <Pricing />
+    <FAQ />
+    <Subscribe />
+    <Footer />
 </template>
