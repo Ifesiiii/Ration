@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import ListView from '../views/ListView.vue'
 
 
 const router = createRouter({
@@ -13,10 +14,16 @@ const router = createRouter({
         }
     },
 
-    routes: [{
+    routes: [
+        {
             path: '/',
             name: 'home',
             component: HomeView,
+        },
+        {
+            path: '/waitlist',
+            name: 'waitlist',
+            component: ListView,
         },
     ],
 })

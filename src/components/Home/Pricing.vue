@@ -6,7 +6,7 @@
 
 
 <template>
-  <section class="bg-white py-16 px-4 mb-15">
+  <section id="pricing" class="bg-white py-16 px-4 mb-15">
     <div class="max-w-6xl mx-auto">
       <!-- Header Section -->
       <div class="text-center mb-12">

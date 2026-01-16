@@ -13,6 +13,7 @@ import Footer from '../components/Footer.vue';
 
 
 <template>
+    <div class="pt-20">
     <Navbar />
     <Hero />
     <Features />
@@ -23,4 +24,5 @@ import Footer from '../components/Footer.vue';
     <FAQ />
     <Subscribe />
     <Footer />
+    </div>
 </template>

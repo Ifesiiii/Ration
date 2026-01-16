@@ -59,7 +59,7 @@ onUnmounted(() => {
 
 
 <template>
-  <section class="bg-[#F8F8F8] py-16 px-4 mb-15">
+  <section id="features" class="bg-[#F8F8F8] py-16 px-4 mb-15">
     <div class="max-w-7xl mx-auto">
       <!-- Section Header -->
       <div class="text-center mb-12">
@@ -146,7 +146,7 @@ onUnmounted(() => {
                 />
                 <div class="absolute inset-0 bg-linear-to-t from-black/70 via-black/40 to-transparent"></div>
                 <div class="absolute bottom-0 left-0 right-0 p-8 md:p-12 text-white">
-                <h3 class="text-3xl md:text-4xl font-bold mb-4">
+                <h3 class="text-3xl md:text-4xl max-w-2xl font-bold mb-4 ">
                     {{ slide.title }}
                 </h3>
                 <button class="bg-white text-gray-900 px-6 py-3 rounded font-semibold hover:bg-gray-100 transition-colors duration-200">

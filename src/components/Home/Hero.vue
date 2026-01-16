@@ -8,7 +8,7 @@ import army from '../../assets/img/army.png'
 <template>
   <div>
     <!-- Hero Section -->
-    <section class="bg-[#003854] text-white py-20 px-4">
+    <section id="home" class="bg-[#003854] text-white py-20 px-4">
       <div class="max-w-6xl mx-auto text-center">
         <!-- Main Heading -->
         <h1 class="text-4xl md:text-5xl lg:text-[64px] font-bold mb-6">
@@ -23,9 +23,11 @@ import army from '../../assets/img/army.png'
 
         <!-- CTA Buttons -->
         <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <RouterLink to="/waitlist">
           <button class="bg-[#069] hover:bg-cyan-600 text-white px-8 py-3 rounded font-semibold transition-colors duration-200">
             Join Waitlist
           </button>
+          </RouterLink>
           <button class="bg-transparent hover:bg-white/10 text-white px-8 py-3 rounded font-semibold transition-colors duration-200">
             Learn More
           </button>
