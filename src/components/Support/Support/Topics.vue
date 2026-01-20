@@ -6,32 +6,32 @@ const topics = ref([
   {
     title: 'Getting Started with Ration',
     description: 'Learn how to set up accounts for email, chat, and more.',
-    route: '/getting-started'
+    route: '/support/getting-started'
   },
   {
     title: 'Billing and Subscription Plans',
     description: 'Get details on pricing, upgrading, and managing your subscription.',
-    route: '/billing'
+    route: '/support/billing'
   },
   {
     title: 'Mobile App Setup',
     description: 'Get Ration Suite up and running on your iOS or Android devices.',
-    route: '/mobile-setup'
+    route: '/support/mobile-setup'
   },
   {
     title: 'Managing Your Account',
     description: 'Update profile details, reset passwords, and configure settings.',
-    route: '/account-management'
+    route: '/support/account-management'
   },
   {
     title: 'Troubleshooting',
     description: 'Resolve common issues like login errors, syncing problems, or connectivity issues.',
-    route: '/troubleshooting'
+    route: '/support/troubleshooting'
   },
   {
     title: 'Admin Tools and Permissions',
     description: 'Set roles, manage user access, and customize admin controls.',
-    route: '/admin-tools'
+    route: '/support/admin-tools'
   }
 ]);
 </script>
