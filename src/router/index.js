@@ -4,7 +4,10 @@ import ListView from '../views/ListView.vue'
 import SupportView from '../views/SupportView.vue'
 import StartedView from '../views/StartedView.vue'
 import AccountView from '../views/AccountView.vue'
-
+import GuideView from '../views/GuideView.vue'
+import SetupView from '../views/SetupView.vue'
+import AdminView from '../views/AdminView.vue'
+import BillingView from '../views/BillingView.vue'
 
 const router = createRouter({
     history: createWebHistory(
@@ -43,6 +46,26 @@ const router = createRouter({
             name: 'account management',
             component: AccountView,
         },
+        {
+            path: '/support/troubleshooting',
+            name: 'troubleshooting',
+            component: GuideView,
+        },
+        {
+            path: '/support/mobile-setup',
+            name: 'mobile setup',
+            component: SetupView,
+        },
+        {
+            path: '/support/admin-tools',
+            name: 'admin tools',
+            component: AdminView,
+        },
+        {
+            path: '/support/billing',
+            name: 'billing',
+            component: BillingView,
+        }
     ],
 })
 
