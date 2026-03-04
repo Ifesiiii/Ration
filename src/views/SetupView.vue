@@ -6,7 +6,9 @@ import Footer from '../components/Support/Footer.vue';
 
 
 <template>
+    <div class="font-heading">
     <Navbar />
     <Content />
     <Footer />
+    </div>
 </template>

@@ -13,7 +13,7 @@ import Footer from '../components/Footer.vue';
 
 
 <template>
-    <div class="pt-20">
+    <div class="pt-20 font-heading">
     <Navbar />
     <Hero />
     <Features />
