@@ -119,7 +119,7 @@ onUnmounted(() => {
     </div>
 
     <!-- Mobile Navigation -->
-    <div v-if="isMenuOpen" class="md:hidden bg-[#058] border-t border-cyan-700">
+    <div v-if="isMenuOpen" class="md:hidden bg-[#003854] border-t border-cyan-700">
       <div class="px-2 pt-2 pb-3 space-y-1">
         <template v-for="link in navLinks" :key="link.name">
           <!-- For sections with smooth scroll -->
