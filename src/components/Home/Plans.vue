@@ -20,7 +20,7 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         
         <!-- Card 1: SaaS Edition -->
-        <div class="bg-white border-[#EAF0F44D] rounded-lg p-8 shadow-md hover:shadow-lg transition-shadow duration-300">
+        <div class="bg-white border-[#EAF0F44D] rounded-lg p-8 shadow-md hover:shadow-lg transition-shadow duration-300 h-full flex flex-col">
           <!-- Card Header -->
           <div class="mb-6">
             <h3 class="text-lg font-bold text-[#131313] mb-3 text-center">
@@ -32,7 +32,7 @@
           </div>
 
           <!-- Features List -->
-          <ul class="space-y-4 mb-14">
+          <ul class="space-y-4 mb-8 flex-1">
             <li class="flex items-start gap-3">
               <div class="w-6 h-6 bg-[#069] rounded-full flex items-center justify-center shrink-0 mt-0.5">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" viewBox="0 0 20 20" fill="currentColor">
@@ -82,7 +82,7 @@
         </div>
 
         <!-- Card 2: MSP Edition -->
-        <div class="bg-white border-[#EAF0F44D] rounded-lg p-8 shadow-md hover:shadow-lg transition-shadow duration-300">
+        <div class="bg-white border-[#EAF0F44D] rounded-lg p-8 shadow-md hover:shadow-lg transition-shadow duration-300 h-full flex flex-col">
           <!-- Card Header -->
           <div class="mb-6">
             <h3 class="text-lg font-bold text-[#131313] mb-3 text-center">
@@ -94,7 +94,7 @@
           </div>
 
           <!-- Features List -->
-          <ul class="space-y-4 mb-8">
+          <ul class="space-y-4 mb-8 flex-1">
             <li class="flex items-start gap-3">
               <div class="w-6 h-6 bg-[#069] rounded-full flex items-center justify-center shrink-0 mt-0.5">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" viewBox="0 0 20 20" fill="currentColor">
@@ -144,7 +144,7 @@
         </div>
 
         <!-- Card 3: DC On-Premise Edition -->
-        <div class="bg-white border-[#EAF0F44D] rounded-lg p-8 shadow-md hover:shadow-lg transition-shadow duration-300">
+        <div class="bg-white border-[#EAF0F44D] rounded-lg p-8 shadow-md hover:shadow-lg transition-shadow duration-300 h-full flex flex-col">
           <!-- Card Header -->
           <div class="mb-6">
             <h3 class="text-xl font-bold text-[#131313] mb-3 text-center">
@@ -156,7 +156,7 @@
           </div>
 
           <!-- Features List -->
-          <ul class="space-y-4 mb-14">
+          <ul class="space-y-4 mb-8 flex-1">
             <li class="flex items-start gap-3">
               <div class="w-6 h-6 bg-[#069] rounded-full flex items-center justify-center shrink-0 mt-0.5">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" viewBox="0 0 20 20" fill="currentColor">
