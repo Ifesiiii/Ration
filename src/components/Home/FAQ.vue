@@ -14,7 +14,7 @@ const toggleFaq = (index) => {
 
 
 <template>
-  <section class="bg-white py-16 px-4 mb-15">
+  <section class="bg-white py-30 px-4">
     <div class="max-w-6xl mx-auto">
       <!-- Section Header -->
       <div class="text-center mb-12">

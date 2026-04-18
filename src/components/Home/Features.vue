@@ -59,7 +59,7 @@ onUnmounted(() => {
 
 
 <template>
-  <section id="features" class="bg-[#F8F8F8] py-16 px-4 mb-15">
+  <section id="features" class="bg-[#F8F8F8] py-30 px-4">
     <div class="max-w-7xl mx-auto">
       <!-- Section Header -->
       <div class="text-center mb-12">

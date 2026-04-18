@@ -3,7 +3,7 @@ import quad from '../../assets/img/1.png'
 </script>
 
 <template>
-  <section class="relative bg-[#003047] flex flex-col items-center justify-center px-6 py-20 overflow-hidden text-center">
+  <section class="relative bg-[#003047] flex flex-col items-center justify-center px-6 py-30 overflow-hidden text-center">
     
     <!-- Background Quadrants -->
     <!-- Bottom Left: Rotated 270deg to fit corner -->

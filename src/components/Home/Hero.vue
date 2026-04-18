@@ -8,7 +8,7 @@ import army from '../../assets/img/army.png'
 <template>
   <div>
     <!-- Hero Section -->
-    <section id="home" class="bg-[#003854] text-white py-20 px-4">
+    <section id="home" class="bg-[#003854] text-white py-30 px-4">
       <div class="max-w-6xl mx-auto text-center">
         <!-- Main Heading -->
         <h1 class="text-4xl md:text-5xl lg:text-[64px] font-bold mb-6">
@@ -35,8 +35,8 @@ import army from '../../assets/img/army.png'
       </div>
     </section>
 
-    <!-- Product Image Section (Blue to White Gradient Background) -->
-    <section class="relative bg-linear-to-b from-[#003854] to-white py-16 px-4">
+    <!-- Product Image Section (Blue to White Split Background) -->
+    <section class="relative bg-[linear-gradient(to_bottom,#003854_50%,white_50%)]z py-16 px-4">
       <div class="max-w-5xl mx-auto">
         <div class="bg-gray-200 rounded-lg shadow-2xl overflow-hidden">
           <img 

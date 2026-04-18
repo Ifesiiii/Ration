@@ -3,7 +3,7 @@
 
 
 <template>
-  <section class="bg-white py-16 px-4 mb-15">
+  <section class="bg-white py-30 px-4">
     <div class="max-w-6xl mx-auto">
       <div class="flex flex-col lg:flex-row gap-12 items-start">
         <!-- Left Side - Content -->

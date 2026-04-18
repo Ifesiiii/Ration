@@ -8,7 +8,7 @@ import f2 from '../../assets/img/f2.png'
 
 
 <template>
-  <section class="bg-[#F8FBFC] py-16 px-4 mb-15">
+  <section class="bg-[#F8FBFC] py-30 px-4">
     <div class="max-w-6xl mx-auto">
       <!-- Header Section -->
       <div class="text-center mb-16">
