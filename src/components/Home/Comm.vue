@@ -1,5 +1,5 @@
 <script setup>
-import frame from '../../assets/img/frame.png'
+import frame from '../../assets/img/Frame.png'
 import attendant from '../../assets/img/attendant.png'
 import f1 from '../../assets/img/f1.png' 
 import f2 from '../../assets/img/f2.png'

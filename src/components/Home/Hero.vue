@@ -8,7 +8,7 @@ import army from '../../assets/img/army.png'
 <template>
   <div>
     <!-- Hero Section -->
-    <section id="home" class="bg-[#003854] text-white py-30 px-4">
+    <section id="home" class="bg-[#003854] text-white py-30 px-4 -mt-16">
       <div class="max-w-6xl mx-auto text-center">
         <!-- Main Heading -->
         <h1 class="text-4xl md:text-5xl lg:text-[64px] font-bold mb-6">
@@ -36,7 +36,7 @@ import army from '../../assets/img/army.png'
     </section>
 
     <!-- Product Image Section (Blue to White Split Background) -->
-    <section class="relative bg-[linear-gradient(to_bottom,#003854_50%,white_50%)]z py-16 px-4">
+    <section class="relative bg-[linear-gradient(to_bottom,#003854_50%,white_50%)] px-4">
       <div class="max-w-5xl mx-auto">
         <div class="bg-gray-200 rounded-lg shadow-2xl overflow-hidden">
           <img 
@@ -49,9 +49,9 @@ import army from '../../assets/img/army.png'
     </section>
 
     <!-- Trusted Clients Section -->
-    <section class="bg-white py-16 px-4 mb-12.5">
+    <section class="bg-white py-17 px-4 mb-12.5">
       <div class="max-w-6xl mx-auto text-center">
-        <h2 class="text-2xl md:text-3xl font-semibold text-[#131313] mb-8">
+        <h2 class="text-2xl md:text-3xl text-[#131313] mb-8">
           Our Trusted Clients
         </h2>
 

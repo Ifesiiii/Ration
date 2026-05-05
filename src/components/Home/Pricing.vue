@@ -42,14 +42,14 @@ const plans = [
     description: 'Where teams actually work together',
     features: [
       { text: 'Everything in Start, plus:', type: 'check' },
-      { text: 'Rooms (video/audio meetings)', type: 'video' },
-      { text: 'Full Chat + Channels', type: 'chat' },
-      { text: 'Drive & File sharing', type: 'cloud' },
-      { text: 'Notes / Wiki', type: 'book' },
-      { text: 'Workflow / Approvals', type: 'list' }
+      { text: 'Rooms (video/audio meetings)', type: 'check' },
+      { text: 'Full Chat + Channels', type: 'check' },
+      { text: 'Drive & File sharing', type: 'check' },
+      { text: 'Notes / Wiki', type: 'check' },
+      { text: 'Workflow / Approvals', type: 'check' }
     ],
     limitInfo: '60-min meetings · 25 participants · Fair usage limits apply',
-    cta: 'Do the work →'
+    cta: 'Do the work'
   },
   {
     id: 'scale',
@@ -64,11 +64,11 @@ const plans = [
     description: 'Control, compliance, scale',
     features: [
       { text: 'Everything in Do, plus:', type: 'check' },
-      { text: 'Audit logs', type: 'chart' },
-      { text: 'Compliance controls', type: 'hammer' },
-      { text: 'Policy enforcement', type: 'lock' },
-      { text: 'Priority support', type: 'bell' },
-      { text: 'Higher usage limits', type: 'schart' }
+      { text: 'Audit logs', type: 'check' },
+      { text: 'Compliance controls', type: 'check' },
+      { text: 'Policy enforcement', type: 'check' },
+      { text: 'Priority support', type: 'check' },
+      { text: 'Higher usage limits', type: 'check' }
     ],
     limitInfo: '120-min meetings · 50 participants · Higher concurrency',
     cta: 'Scale with confidence'
@@ -81,31 +81,31 @@ const plans = [
 
 <template>
   <section id="pricing" class="bg-gray-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-30">   
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-30">   
     <!-- Header Section -->
     <div class="max-w-5xl mx-auto text-center mb-12">
       <!-- Main Heading -->
       <h1 class="text-[#131313] text-4xl sm:text-5xl lg:text-6xl font-bold mb-2">
-        One platform for collaboration.
+        Pricing Plans.
       </h1>
       
-      <!-- Sub Heading -->
+      <!-- Sub Heading
       <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#069] mb-6">
         Three ways to grow.
       </h2>
-      
+       -->
       <!-- Tagline -->
-      <p class="text-xl sm:text-2xl text-gray-800 mb-4 font-bold">
+      <p class="text-xl sm:text-2xl text-gray-800 mb-4">
         Start with collaboration. Do the work. Scale with confidence.
       </p>
       
       <!-- Features List -->
-      <p class="text-base sm:text-lg text-gray-400 mb-10 max-w-3xl mx-auto font-medium">
+      <!-- <p class="text-base sm:text-lg text-gray-400 mb-10 max-w-3xl mx-auto font-medium">
         Email. Meetings. Chat. Documents. Workflows. One system, hosted in Nigeria.
       </p>
-      
+       -->
       <!-- Badges -->
-      <div class="flex flex-wrap justify-center gap-6 sm:gap-8">
+      <!-- <div class="flex flex-wrap justify-center gap-6 sm:gap-8">
         <div class="flex items-center gap-2 text-[#131313]">
           <svg class="w-5 h-5 text-[#069]" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
@@ -126,7 +126,7 @@ const plans = [
           </svg>
           <span class="text-sm sm:text-base font-medium">24/7 support</span>
         </div>
-      </div>
+      </div> -->
     </div>   
 
     <!-- Main Plan: Ration Core -->
@@ -155,7 +155,7 @@ const plans = [
       </div>
 
       <!-- Cards Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         
         <!-- Card Component -->
         <div 
@@ -178,40 +178,40 @@ const plans = [
             <div class="flex justify-between items-start mb-4 min-h-8">
               <span 
                 :class="[
-                  'inline-flex items-center px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wide',
-                  plan.badgeType === 'entry' ? 'bg-gray-100 text-[#424242]' :
-                  plan.badgeType === 'engine' ? 'bg-blue-50 text-[#069]' :
+                  'inline-flex items-center px-4 py-1 rounded-full text-sm font-medium uppercase tracking-wide',
+                  plan.badgeType === 'entry' ? 'bg-[#F4F4F4] text-[#131313]' :
+                  plan.badgeType === 'engine' ? 'bg-[#F5F9FB] text-[#069]' :
                   'bg-[#131313] text-white'
                 ]"
               >
-                {{ plan.badgeType === 'engine' ? '★ ' : '' }}{{ plan.badgeText }}
+                {{ plan.badgeType === 'engine' ? '' : '' }}{{ plan.badgeText }}
               </span>
 
-              <span v-if="plan.popular" class="bg-amber-100 text-amber-700 text-sm font-bold px-3 py-1 rounded-full">
+              <!-- <span v-if="plan.popular" class="bg-amber-100 text-amber-700 text-sm font-bold px-3 py-1 rounded-full">
                 ⭐ Most popular
-              </span>
+              </span> -->
             </div>
 
             <!-- Plan Name -->
-            <h3 class="text-2xl font-extrabold text-[#131313] mb-2">{{ plan.name }}</h3>
+            <h3 class="text-[28px] font-bold text-[#131313] mb-2">{{ plan.name }}</h3>
 
             <!-- Price -->
             <div class="flex items-baseline mb-1">
-              <span class="text-4xl font-extrabold text-[#131313]">
+              <span class="text-[48px] font-extrabold text-[#131313]">
                 {{ plan.currency }}{{ (billingPeriod === 'monthly' ? plan.price : plan.annualPrice).toLocaleString() }}
               </span>
-              <span class="text-gray-500 ml-2 text-lg">
+              <span class="text-[#616161] ml-2 text-lg">
                 /user /{{ billingPeriod === 'monthly' ? 'month' : 'year' }}
               </span>
             </div>
 
             <!-- Billing Text -->
-            <p class="text-lg text-gray-500 mb-6">
+            <p class="text-[16px] text-[#616161] mb-5">
               {{ billingPeriod === 'monthly' ? 'Billed monthly' : 'Billed annually (save ' + plan.annualSavings.toLocaleString() + ')' }}
             </p>
 
             <!-- Description -->
-            <p class="text-[#64748B] mb-6 font-medium text-md">{{ plan.description }}</p>
+            <p class="text-[#616161] mb-6 text-md">{{ plan.description }}</p>
 
             <!-- Features List -->
             <ul class="space-y-4 mb-8 grow">
@@ -223,8 +223,8 @@ const plans = [
                   
                   <!-- Icons for Active Features -->
                   <template v-else>
-                    <svg v-if="feature.type === 'check'" class="w-6 h-6 text-[#069]" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    <svg v-if="feature.type === 'check'" class="text-[#069]" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path d="M20.25 6.75L9.75 17.25L4.5 12" stroke="#006699" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                     <svg v-else-if="feature.type === 'video'" class="w-6 h-6 text-[#069]" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"/>
@@ -262,7 +262,7 @@ const plans = [
                 <!-- Feature Text -->
                 <span 
                   :class="[
-                    'text-md font-medium',
+                    'text-[16px]',
                     feature.excluded ? 'text-gray-400' : 'text-[#131313]'
                   ]"
                 >
@@ -272,9 +272,9 @@ const plans = [
             </ul>
 
             <!-- Limit Info Box (Conditional - for Do and Scale plans) -->
-            <div v-if="plan.limitInfo" class="bg-gray-50 rounded-lg p-3 mb-6 border border-gray-100">
-              <div class="flex gap-2 text-[15px] text-gray-500">
-                <svg class="w-4 h-4 text-[#069] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+            <div v-if="plan.limitInfo" class="bg-[#F8FBFC] rounded-lg p-3 mb-6 border border-gray-100">
+              <div class="flex gap-2 text-[15px] text-[#131313]">
+                <svg class="w-6 h-6 text-[#069] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
                 </svg>
                 <p>{{ plan.limitInfo }}</p>
@@ -285,7 +285,7 @@ const plans = [
             <div class="mt-auto pt-2">
               <button 
                 :class="[
-                  'w-full py-3 px-4 rounded-xl font-semibold text-md transition-colors duration-200',
+                  'w-full py-3 px-4 rounded-lg font-semibold text-md transition-colors duration-200',
                   selectedPlan === plan.id 
                     ? 'bg-[#069] text-white shadow-md hover:bg-[#069]' 
                     : 'bg-white text-[#424242] border border-gray-300 hover:bg-gray-50 hover:border-gray-400'
@@ -300,22 +300,22 @@ const plans = [
 
     
       <!-- Fair Usage Card -->
-        <div class="bg-white rounded-2xl p-8 sm:p-10 shadow-sm border border-gray-100">
-        <div class="flex items-start gap-3 mb-4">
+        <!-- <div class="bg-white rounded-2xl p-8 sm:p-10 shadow-sm border border-gray-100">
+        <div class="flex items-start gap-3 mb-4"> -->
           <!-- Balance Scale Icon -->
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor" class="w-7 h-7 text-[#069] shrink-0 mt-0.5"><path d="M384 96L512 96C529.7 96 544 110.3 544 128C544 145.7 529.7 160 512 160L398.4 160C393.2 185.8 375.5 207.1 352 217.3L352 512L512 512C529.7 512 544 526.3 544 544C544 561.7 529.7 576 512 576L128 576C110.3 576 96 561.7 96 544C96 526.3 110.3 512 128 512L288 512L288 217.3C264.5 207 246.8 185.7 241.6 160L128 160C110.3 160 96 145.7 96 128C96 110.3 110.3 96 128 96L256 96C270.6 76.6 293.8 64 320 64C346.2 64 369.4 76.6 384 96zM439.6 384L584.4 384L512 259.8L439.6 384zM512 480C449.1 480 396.8 446 386 401.1C383.4 390.1 387 378.8 392.7 369L487.9 205.8C492.9 197.2 502.1 192 512 192C521.9 192 531.1 197.3 536.1 205.8L631.3 369C637 378.8 640.6 390.1 638 401.1C627.2 445.9 574.9 480 512 480zM126.8 259.8L54.4 384L199.3 384L126.8 259.8zM.9 401.1C-1.7 390.1 1.9 378.8 7.6 369L102.8 205.8C107.8 197.2 117 192 126.9 192C136.8 192 146 197.3 151 205.8L246.2 369C251.9 378.8 255.5 390.1 252.9 401.1C242.1 445.9 189.8 480 126.9 480C64 480 11.7 446 .9 401.1z"/></svg>
+          <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor" class="w-7 h-7 text-[#069] shrink-0 mt-0.5"><path d="M384 96L512 96C529.7 96 544 110.3 544 128C544 145.7 529.7 160 512 160L398.4 160C393.2 185.8 375.5 207.1 352 217.3L352 512L512 512C529.7 512 544 526.3 544 544C544 561.7 529.7 576 512 576L128 576C110.3 576 96 561.7 96 544C96 526.3 110.3 512 128 512L288 512L288 217.3C264.5 207 246.8 185.7 241.6 160L128 160C110.3 160 96 145.7 96 128C96 110.3 110.3 96 128 96L256 96C270.6 76.6 293.8 64 320 64C346.2 64 369.4 76.6 384 96zM439.6 384L584.4 384L512 259.8L439.6 384zM512 480C449.1 480 396.8 446 386 401.1C383.4 390.1 387 378.8 392.7 369L487.9 205.8C492.9 197.2 502.1 192 512 192C521.9 192 531.1 197.3 536.1 205.8L631.3 369C637 378.8 640.6 390.1 638 401.1C627.2 445.9 574.9 480 512 480zM126.8 259.8L54.4 384L199.3 384L126.8 259.8zM.9 401.1C-1.7 390.1 1.9 378.8 7.6 369L102.8 205.8C107.8 197.2 117 192 126.9 192C136.8 192 146 197.3 151 205.8L246.2 369C251.9 378.8 255.5 390.1 252.9 401.1C242.1 445.9 189.8 480 126.9 480C64 480 11.7 446 .9 401.1z"/></svg>
           <h3 class="text-xl sm:text-2xl font-bold text-[#131313]">
             Fair usage — built for real teams, not abuse
           </h3>
-        </div>
+        </div> -->
 
         <!-- Description Text -->
-        <p class="text-gray-500 mb-8 leading-relaxed max-w-2xl">
+        <!-- <p class="text-gray-500 mb-8 leading-relaxed max-w-2xl">
           To ensure quality service for all customers, Ration Do and Ration Scale include reasonable usage limits. These are not hard caps for normal teams — only protections against automated or abusive usage patterns.
-        </p>
+        </p> -->
 
         <!-- Table -->
-        <div class="overflow-x-auto">
+        <!-- <div class="overflow-x-auto">
           <table class="w-full text-left border-collapse">
             <thead>
               <tr class="bg-gray-50">
@@ -324,37 +324,37 @@ const plans = [
                 <th class="py-4 px-4 text-sm font-semibold text-[#131313] text-center rounded-r-lg">Ration Scale</th>
               </tr>
             </thead>
-            <tbody class="text-md">
+            <tbody class="text-md"> -->
               <!-- Row 1 -->
-              <tr class="border-b border-gray-200">
+              <!-- <tr class="border-b border-gray-200">
                 <td class="py-4 px-4 text-gray-700 font-medium">Max meeting duration</td>
                 <td class="py-4 px-4 text-gray-900 text-center">60 minutes</td>
                 <td class="py-4 px-4 text-gray-900 text-center">120 minutes</td>
-              </tr>
+              </tr> -->
               <!-- Row 2 -->
-              <tr class="border-b border-gray-200">
+              <!-- <tr class="border-b border-gray-200">
                 <td class="py-4 px-4 text-gray-700 font-medium">Max participants per meeting</td>
                 <td class="py-4 px-4 text-gray-900 text-center">25</td>
                 <td class="py-4 px-4 text-gray-900 text-center">50</td>
-              </tr>
+              </tr> -->
               <!-- Row 3 -->
-              <tr class="border-b border-gray-200">
+              <!-- <tr class="border-b border-gray-200">
                 <td class="py-4 px-4 text-gray-700 font-medium">Concurrent meetings (soft limit)</td>
                 <td class="py-4 px-4 text-gray-900 text-center">users ÷ 2</td>
                 <td class="py-4 px-4 text-gray-900 text-center">users ÷ 1.5</td>
               </tr>
             </tbody>
-          </table>
-        </div>
+          </table> -->
+        <!-- </div> -->
 
         <!-- Footer Link -->
-        <p class="mt-8 text-md text-gray-400">
+        <!-- <p class="mt-8 text-md text-gray-400">
           Need higher limits? 
           <a href="#" class="text-[#069] hover:text-blue-600 hover:underline font-medium">Contact sales</a>
           for custom capacity or dedicated infrastructure.
-        </p>
+        </p> -->
 
-      </div>
+      <!-- </div> -->
 
     </div>
   </section>

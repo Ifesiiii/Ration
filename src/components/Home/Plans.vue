@@ -4,7 +4,7 @@
 
 
 <template>
-  <section class="bg-[#F8FBFC] py-16 px-4">
+  <section class="bg-[#F8FBFC] py-30 px-4">
     <div class="max-w-7xl mx-auto">
       <!-- Section Header -->
       <div class="text-center mb-12">

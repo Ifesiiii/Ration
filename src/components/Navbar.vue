@@ -1,4 +1,4 @@
-<script setup>
+ <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 import { RouterLink } from 'vue-router';
 
@@ -60,9 +60,9 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <nav class="bg-[#003854] text-white fixed w-full top-0 z-50">
-    <div class="max-w-8xl mx-auto px-4 sm:px-6 md:px-10 md:py-3 lg:px-20 lg:py-4">
-      <div class="flex items-center justify-between h-16">
+  <nav class="bg-[#003854] text-white fixed w-full top-0 z-30">
+    <div class="max-w-8xl mx-auto px-4 sm:px-6 md:px-10 md:py-3 lg:px-20 py-3">
+      <div class="flex items-center justify-between h-10">
         <!-- Logo -->
         <RouterLink to="/" @click="scrollToSection('home')">
           <div class="flex items-center space-x-2 cursor-pointer">

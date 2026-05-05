@@ -13,12 +13,12 @@ const slides = [
   },
   {
     image: laptop,
-    title: 'Collaborate seamlessly with your team across all devices.',
-    buttonText: 'Learn More'
+    title: 'Plan, meet, and decide-all in one place, without the chaos.',
+    buttonText: 'Get Started'
   },
   {
     image: group,
-    title: 'Stay connected and productive wherever you work.',
+    title: 'Ration brings your team, tasks, and tools together so work flows naturally.',
     buttonText: 'Get Started'
   }
 ];
@@ -63,7 +63,7 @@ onUnmounted(() => {
     <div class="max-w-7xl mx-auto">
       <!-- Section Header -->
       <div class="text-center mb-12">
-        <h2 class="text-4xl md:text-5xl font-bold text-[#002B40] mb-4 leading-16">
+        <h2 class="text-4xl md:text-5xl font-bold text-[#131313] mb-4 leading-16">
           Messaging . Meetings .<br> Collaboration
         </h2>
         <p class="text-base md:text-lg text-[#131313] max-w-3xl mx-auto">
@@ -72,7 +72,7 @@ onUnmounted(() => {
       </div>
 
       <!-- Slider Container -->
-      <div class="flex items-center gap-8">
+      <div class="flex items-center gap-8 font-break">
         <!-- Left Arrow -->
         <button 
           @click="previousSlide"
@@ -117,13 +117,13 @@ onUnmounted(() => {
 
               <!-- Feature Tags -->
               <div class="flex flex-wrap gap-3 mt-8">
-                <span class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm">
+                <span class="px-4 py-1 border border-[#B6B6B6] text-[#131313] text-sm">
                   Smart mail
                 </span>
-                <span class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm">
+                <span class="px-4 py-1 border border-[#B6B6B6] text-[#131313] text-sm">
                   Instant Conversation
                 </span>
-                <span class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm">
+                <span class="px-4 py-1 border border-[#B6B6B6] text-[#131313] text-sm">
                   Smart Connections
                 </span>
               </div>
