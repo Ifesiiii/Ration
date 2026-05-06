@@ -6,7 +6,7 @@ import Form from './Form.vue';
 <template>
   <div>
     <!-- Hero Section -->
-    <section id="home" class="bg-[#003854] text-white py-20 px-4">
+    <section class="bg-[#003854] text-white py-20 px-4 -mt-16">
       <div class="max-w-6xl mx-auto text-center">
         <!-- Main Heading -->
         <h1 class="text-4xl md:text-5xl lg:text-[64px] max-w-3xl mx-auto font-bold mb-6">
@@ -21,7 +21,7 @@ import Form from './Form.vue';
     </section>
 
     <!-- Product Image Section -->
-    <section class="relative bg-linear-to-b from-[#003854] to-white py-8 px-4 mb-15">
+    <section class="relative bg-[linear-gradient(to_bottom,#003854_50%,white_50%)] py-8 px-4 mb-15">
       <div class="max-w-5xl mx-auto">
         <Form />
       </div>

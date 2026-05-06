@@ -10,14 +10,14 @@ import quad from '../../assets/img/1.png'
     <img 
       :src="quad" 
       alt="" 
-      class="absolute bottom-0 left-0 w-90 rotate-360 pointer-events-none" 
+      class="absolute bottom-0 left-0 w-80 rotate-360 pointer-events-none" 
     />
     
     <!-- Top Right: Rotated 90deg to fit corner -->
     <img 
       :src="quad" 
       alt="" 
-      class="absolute top-0 right-0 w-90 h-auto rotate-180 pointer-events-none" 
+      class="absolute top-0 right-0 w-80 h-auto rotate-180 pointer-events-none" 
     />
 
     <!-- Content -->
