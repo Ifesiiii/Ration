@@ -9,7 +9,7 @@ import army from '../../assets/img/army.png'
   <div>
     <!-- Hero Section -->
     <section id="home" class="bg-[#003854] text-white py-30 px-4 -mt-16">
-      <div class="max-w-6xl mx-auto text-center">
+      <div class="max-w-5xl mx-auto text-center">
         <!-- Main Heading -->
         <h1 class="text-4xl md:text-5xl lg:text-[64px] font-bold mb-6">
           Communicate and<br />
@@ -42,7 +42,7 @@ import army from '../../assets/img/army.png'
           <img 
             :src="mid" 
             alt="Ration Platform Interface" 
-            class="w-full h-auto"
+            class="mx-auto h-auto"
           />
         </div>
       </div>

@@ -8,6 +8,8 @@ import GuideView from '../views/GuideView.vue'
 import SetupView from '../views/SetupView.vue'
 import AdminView from '../views/AdminView.vue'
 import BillingView from '../views/BillingView.vue'
+import DocsView from '../views/DocsView.vue'
+
 
 const router = createRouter({
     history: createWebHistory(
@@ -65,6 +67,11 @@ const router = createRouter({
             path: '/support/billing',
             name: 'billing',
             component: BillingView,
+        },
+        {
+            path: '/docs',
+            name: 'Docs',
+            component: DocsView,
         }
     ],
 })

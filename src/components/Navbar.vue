@@ -1,4 +1,4 @@
- <script setup>
+<script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 import { RouterLink } from 'vue-router';
 
@@ -10,8 +10,27 @@ const navLinks = [
   { name: 'Features', path: '/features', section: 'features' },
   { name: 'Pricing', path: '/pricing', section: 'pricing' },
   { name: 'Docs', path: '/docs', section: null },
-  { name: 'Contact', path: '/contact', section: null }
+  { name: 'Contact', path: '/contact', section: null, isContact: true }
 ];
+
+const scrollToContact = () => {
+  const el = document.getElementById('footer-contact');
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth' });
+
+    const applyHighlight = () => {
+      el.classList.add('contact-highlight');
+      setTimeout(() => el.classList.remove('contact-highlight'), 750);
+    };
+
+    if ('onscrollend' in window) {
+      window.addEventListener('scrollend', applyHighlight, { once: true });
+    } else {
+      setTimeout(applyHighlight, 800);
+    }
+  }
+  isMenuOpen.value = false;
+};
 
 
 const scrollToSection = (sectionId) => {
@@ -36,15 +55,25 @@ const scrollToSection = (sectionId) => {
 
 const handleScroll = () => {
   const sections = ['home', 'features', 'pricing'];
-  const scrollPosition = window.scrollY + 200; 
+  const scrollPosition = window.scrollY + 200;
+  let matched = false;
+
   for (const sectionId of sections) {
     const element = document.getElementById(sectionId);
     if (element) {
       const { offsetTop, offsetHeight } = element;
       if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
         activeSection.value = sectionId;
+        matched = true;
         break;
       }
+    }
+  }
+
+  if (!matched) {
+    const pricingEl = document.getElementById('pricing');
+    if (pricingEl && scrollPosition >= pricingEl.offsetTop + pricingEl.offsetHeight) {
+      activeSection.value = null;
     }
   }
 };
@@ -61,7 +90,7 @@ onUnmounted(() => {
 
 <template>
   <nav class="bg-[#003854] text-white fixed w-full top-0 z-30">
-    <div class="max-w-8xl mx-auto px-4 sm:px-6 md:px-10 md:py-3 lg:px-20 py-3">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 md:py-3 lg:px-20 py-3">
       <div class="flex items-center justify-between h-10">
         <!-- Logo -->
         <RouterLink to="/" @click="scrollToSection('home')">
@@ -87,7 +116,17 @@ onUnmounted(() => {
               {{ link.name }}
             </a>
             
-            <!-- For regular router links (Docs, Contact) -->
+            <!-- For Contact → scrolls to footer -->
+            <a
+              v-else-if="link.isContact"
+              @click.prevent="scrollToContact"
+              href="#"
+              class="hover:text-gray-200 transition-colors duration-200 cursor-pointer pb-1"
+            >
+              {{ link.name }}
+            </a>
+
+            <!-- For regular router links (Docs) -->
             <router-link 
               v-else
               :to="link.path" 
@@ -133,6 +172,16 @@ onUnmounted(() => {
             {{ link.name }}
           </a>
           
+          <!-- For Contact → scrolls to footer -->
+          <a
+            v-else-if="link.isContact"
+            @click.prevent="scrollToContact"
+            href="#"
+            class="block px-3 py-2 hover:text-gray-200 transition-colors duration-200 cursor-pointer"
+          >
+            {{ link.name }}
+          </a>
+
           <!-- For regular router links -->
           <router-link 
             v-else

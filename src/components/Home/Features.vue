@@ -60,7 +60,7 @@ onUnmounted(() => {
 
 <template>
   <section id="features" class="bg-[#F8F8F8] py-30 px-4">
-    <div class="max-w-7xl mx-auto">
+    <div class="max-w-6xl mx-auto">
       <!-- Section Header -->
       <div class="text-center mb-12">
         <h2 class="text-4xl md:text-5xl font-bold text-[#131313] mb-4 leading-16">

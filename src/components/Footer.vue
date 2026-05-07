@@ -1,10 +1,32 @@
 <script setup>
 import logo from '../assets/img/logo.png'
-import { RouterLink } from 'vue-router';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const smoothScroll = (hash) => {
+  const el = document.getElementById(hash);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth' });
+  } else {
+    router.push('/').then(() => {
+      setTimeout(() => {
+        const target = document.getElementById(hash);
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      }, 300);
+    });
+  }
+};
 </script>
 
+<style scoped>
+.contact-highlight {
+  background-color: #e0f2fe !important;
+}
+</style>
+
 <template>
-  <footer class="mx-auto bg-white py-16 px-4">
+  <footer class="mx-auto bg-white pt-16 px-4">
     <div class="max-w-6xl mx-auto">
       <!-- Main Footer Content -->
       <div class="flex flex-col lg:flex-row justify-between gap-12 mb-16">
@@ -29,16 +51,16 @@ import { RouterLink } from 'vue-router';
             <h3 class="text-lg font-semibold mb-4">Company</h3>
             <ul class="space-y-3">
               <li>
-                <RouterLink to="/company/about" class="text-base text-[#131313] hover:text-[#0A5C7A] transition-colors">About</RouterLink>
+                <a href="#" @click.prevent="smoothScroll('home')" class="text-base text-[#131313] hover:text-[#0A5C7A] transition-colors">About</a>
               </li>
               <li>
-                <RouterLink to="/services" class="text-base text-[#131313] hover:text-[#0A5C7A] transition-colors">Services</RouterLink>
+                <a href="#" @click.prevent="smoothScroll('features')" class="text-base text-[#131313] hover:text-[#0A5C7A] transition-colors">Services</a>
               </li>
               <li>
-                <RouterLink to="/pricing" class="text-base text-[#131313] hover:text-[#0A5C7A] transition-colors">Pricing plans</RouterLink>
+                <a href="#" @click.prevent="smoothScroll('pricing')" class="text-base text-[#131313] hover:text-[#0A5C7A] transition-colors">Pricing plans</a>
               </li>
               <li>
-                <RouterLink to="/deployment" class="text-base text-[#131313] hover:text-[#0A5C7A] transition-colors">Deployment plans</RouterLink>
+                <a href="#" @click.prevent="smoothScroll('plans')" class="text-base text-[#131313] hover:text-[#0A5C7A] transition-colors">Deployment plans</a>
               </li>
             </ul>
           </div>
@@ -48,23 +70,23 @@ import { RouterLink } from 'vue-router';
             <h3 class="text-lg font-semibold mb-4">Features</h3>
             <ul class="space-y-3">
               <li>
-                <RouterLink to="/features/mail" class="text-base text-[#131313] hover:text-[#0A5C7A] transition-colors">Mail</RouterLink>
+                <p class="text-base text-[#131313] hover:text-[#0A5C7A] transition-colors">Mail</p>
               </li>
               <li>
-                <RouterLink to="/features/contact" class="text-base text-[#131313] hover:text-[#0A5C7A] transition-colors">Contact</RouterLink>
+                <p class="text-base text-[#131313] hover:text-[#0A5C7A] transition-colors">Contact</p>
               </li>
               <li>
-                <RouterLink to="/features/chat" class="text-base text-[#131313] hover:text-[#0A5C7A] transition-colors">Chat</RouterLink>
+                <p class="text-base text-[#131313] hover:text-[#0A5C7A] transition-colors">Chat</p>
               </li>
               <li>
-                <RouterLink to="/features/calendar" class="text-base text-[#131313] hover:text-[#0A5C7A] transition-colors">Calendar</RouterLink>
+                <p class="text-base text-[#131313] hover:text-[#0A5C7A] transition-colors">Calendar</p>
               </li>
             </ul>
           </div>
 
           <!-- Contact Us Links -->
           <div>
-            <h3 class="text-lg font-semibold mb-4">Contact Us</h3>
+            <h3 id="footer-contact" class="text-lg font-semibold mb-4 transition-colors duration-300 rounded px-1 -mx-1">Contact Us</h3>
             <ul class="space-y-3">
               <li>
                 <a href="" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-base text-[#131313] hover:text-[#0A5C7A] transition-colors">

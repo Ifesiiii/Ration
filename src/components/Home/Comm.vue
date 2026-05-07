@@ -9,7 +9,7 @@ import f2 from '../../assets/img/f2.png'
 
 <template>
   <section class="bg-[#F8FBFC] py-30 px-4">
-    <div class="max-w-6xl mx-auto">
+    <div class="max-w-5xl mx-auto">
       <!-- Header Section -->
       <div class="text-center mb-16">
         <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-6 leading-tight">

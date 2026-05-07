@@ -5,7 +5,7 @@
 
 <template>
   <section class="bg-gray-100 pt-14 pb-30 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-7xl mx-auto">
+    <div class="max-w-6xl mx-auto">
       
       <!-- Section Heading -->
       <h2 class="text-2xl sm:text-3xl font-bold text-[#131313] text-center mb-10">

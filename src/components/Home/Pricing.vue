@@ -1,228 +1,199 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
-const billingPeriod = ref('monthly')
-const selectedPlan = ref('do')
+// Currency State
+const selectedCurrency = ref('NGN')
+
+
+const currencyRates = {
+  NGN: { rate: 1, symbol: '₦', label: 'NGN - Nigeria Naira' },
+  USD: { rate: 0.00065, symbol: '$', label: 'USD - US Dollar' }, // Approx 1 USD = 1538 NGN
+  GBP: { rate: 0.00051, symbol: '£', label: 'GBP - British Pound' }, // Approx 1 GBP = 1960 NGN
+  EUR: { rate: 0.00060, symbol: '€', label: 'EUR - Euro' } // Approx 1 EUR = 1666 NGN
+}
+
+
+const getConvertedPrice = (ngnAmount) => {
+  const currency = currencyRates[selectedCurrency.value]
+  const converted = ngnAmount * currency.rate
+  
+
+  if (selectedCurrency.value === 'NGN') {
+    return `${currency.symbol}${converted.toLocaleString()}`
+  }
+  return `${currency.symbol}${converted.toFixed(2)}`
+}
 
 const plans = [
-  {
-    id: 'start',
-    name: 'Ration Start',
-    price: 2000,
-    annualPrice: 20000,
-    currency: '₦',
-    annualSavings: 4000,
-    badgeType: 'entry',
-    badgeText: 'Entry',
-    popular: false,
-    description: 'Secure communication foundation',
-    features: [
-      { text: 'Mail (25GB per user)', type: 'check' },
-      { text: 'Calendar', type: 'check' },
-      { text: 'Basic Chat', type: 'check' },
-      { text: 'Mobile + Desktop apps', type: 'check' },
-      { text: 'MFA / Identity', type: 'check' },
-      // Excluded features with grey dots
-      { text: 'Rooms (video/audio)', type: 'dot', excluded: true },
-      { text: 'Drive / Notes / Workflows', type: 'dot', excluded: true }
-    ],
-    limitInfo: null,
-    cta: 'Start with collaboration'
-  },
-  {
-    id: 'do',
-    name: 'Ration Do',
-    price: 4000,
-    annualPrice: 40000,
-    currency: '₦',
-    annualSavings: 8000,
-    badgeType: 'engine',
-    badgeText: 'Revenue Engine',
-    popular: true,
-    description: 'Where teams actually work together',
-    features: [
-      { text: 'Everything in Start, plus:', type: 'check' },
-      { text: 'Rooms (video/audio meetings)', type: 'check' },
-      { text: 'Full Chat + Channels', type: 'check' },
-      { text: 'Drive & File sharing', type: 'check' },
-      { text: 'Notes / Wiki', type: 'check' },
-      { text: 'Workflow / Approvals', type: 'check' }
-    ],
-    limitInfo: '60-min meetings · 25 participants · Fair usage limits apply',
-    cta: 'Do the work'
-  },
-  {
-    id: 'scale',
-    name: 'Ration Scale',
-    price: 6000,
-    annualPrice: 60000,
-    currency: '₦',
-    annualSavings: 12000,
-    badgeType: 'enterprise',
-    badgeText: 'Enterprise',
-    popular: false,
-    description: 'Control, compliance, scale',
-    features: [
-      { text: 'Everything in Do, plus:', type: 'check' },
-      { text: 'Audit logs', type: 'check' },
-      { text: 'Compliance controls', type: 'check' },
-      { text: 'Policy enforcement', type: 'check' },
-      { text: 'Priority support', type: 'check' },
-      { text: 'Higher usage limits', type: 'check' }
-    ],
-    limitInfo: '120-min meetings · 50 participants · Higher concurrency',
-    cta: 'Scale with confidence'
-  }
+{
+id: 'start',
+name: 'Ration Start',
+price: 2000, // Monthly base
+annualPrice: 2000,
+currency: '₦',
+annualSavings: 4000,
+badgeType: 'entry',
+badgeText: 'Entry',
+popular: false,
+description: 'Secure communication foundation',
+features: [
+{ text: 'Mail (25GB per user)', type: 'check' },
+{ text: 'Calendar', type: 'check' },
+{ text: 'Basic Chat', type: 'check' },
+{ text: 'Mobile + Desktop apps', type: 'check' },
+{ text: 'MFA / Identity', type: 'check' },
+// Excluded features with grey dots
+{ text: 'Rooms (video/audio)', type: 'dot', excluded: true },
+{ text: 'Drive / Notes / Workflows', type: 'dot', excluded: true }
+],
+limitInfo: null,
+cta: 'Start with collaboration'
+},
+{
+id: 'do',
+name: 'Ration Do',
+price: 4000,
+annualPrice: 4000,
+currency: '₦',
+annualSavings: 8000,
+badgeType: 'engine',
+badgeText: 'Revenue Engine',
+popular: true,
+description: 'Where teams actually work together',
+features: [
+{ text: 'Everything in Start, plus:', type: 'check' },
+{ text: 'Rooms (video/audio meetings)', type: 'check' },
+{ text: 'Full Chat + Channels', type: 'check' },
+{ text: 'Drive & File sharing', type: 'check' },
+{ text: 'Notes / Wiki', type: 'check' },
+{ text: 'Workflow / Approvals', type: 'check' }
+],
+limitInfo: '60-min meetings · 25 participants · Fair usage limits apply',
+cta: 'Do the work'
+},
+{
+id: 'scale',
+name: 'Ration Scale',
+price: 6000,
+annualPrice: 6000,
+currency: '₦',
+annualSavings: 12000,
+badgeType: 'enterprise',
+badgeText: 'Enterprise',
+popular: false,
+description: 'Control, compliance, scale',
+features: [
+{ text: 'Everything in Do, plus:', type: 'check' },
+{ text: 'Audit logs', type: 'check' },
+{ text: 'Compliance controls', type: 'check' },
+{ text: 'Policy enforcement', type: 'check' },
+{ text: 'Priority support', type: 'check' },
+{ text: 'Higher usage limits', type: 'check' }
+],
+limitInfo: '120-min meetings · 50 participants · Higher concurrency',
+cta: 'Scale with confidence'
+}
 ]
 </script>
+<template >
+ <section id= "pricing" class= "bg-gray-100 " >
+ <div class= "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-30 " >   
+ <!-- Header Section -->
+ <div class= "max-w-5xl mx-auto text-center" >
+ <!-- Main Heading -->
+ <h1 class= "text-[#131313] text-4xl sm:text-5xl lg:text-6xl font-bold mb-5" >
+Pricing Plans.
+ </h1 >
+   <!-- Tagline -->
+   <p class= "text-xl sm:text-2xl text-gray-800 mb-5" >
+    Start with collaboration. Do the work. Scale with confidence.
+   </p >
+ </div >   
 
+ <!-- Main Plan: Ration Core -->
+   <div class= "flex justify-center mb-12" >
+     <div class= "flex flex-row items-center gap-3" >
+       <label class= "text-[#424242]" >Select your currency:</label>
+       <select 
+        v-model= "selectedCurrency "
+        class= "bg-white border border-gray-300 text-[#131313] text-lg font-medium rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-3 w-50"
+       >
+        <option v-for= "(currency, code) in currencyRates " :key= "code " :value= "code " >
+         {{ currency.label }}
+        </option>
+       </select>
+     </div>
+   </div>
 
+   <!-- Cards Grid -->
+   <div class= "grid grid-cols-1 md:grid-cols-3 gap-6 " >
+    
+     <!-- Card Component -->
+     <div 
+      v-for= "(plan, index) in plans " 
+      :key= "plan.id "
+      @click= "selectedPlan = plan.id "
+      class= "relative group "
+     >
+       <!-- Main Card Container -->
+       <div 
+        :class= "[
+          'bg-white rounded-2xl p-8 border transition-all duration-300 flex flex-col h-full',
+          selectedPlan === plan.id 
+            ? 'border-[#069] shadow-lg' 
+             : 'border-gray-200 hover:border-gray-300 hover:shadow-md',
+          'hover:-translate-y-1'
+        ] "
+       >
+         <!-- Badges Row -->
+         <div class= "flex justify-between items-start mb-4 min-h-8 " >
+           <span 
+            :class= "[
+              'inline-flex items-center px-4 py-1 rounded-full text-sm font-medium uppercase tracking-wide',
+              plan.badgeType === 'entry' ? 'bg-[#F4F4F4] text-[#1313 13]' :
+              plan.badgeType === 'engine' ? 'bg-[#F5F9FB] text-[#069]' :
+              'bg-[#131313] text-white'
+            ] "
+           >
+            {{ plan.badgeType === 'engine' ? '' : '' }}{{ plan.badgeText }}
+           </span >
 
+           <!--  <span v-if= "plan.popular " class= "bg-amber-100 text-amber-700 text-sm font-bold px-3 py-1 rounded-full " >
+            ⭐ Most popular
+           </span > -->
+         </div >
 
-<template>
-  <section id="pricing" class="bg-gray-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-30">   
-    <!-- Header Section -->
-    <div class="max-w-5xl mx-auto text-center mb-12">
-      <!-- Main Heading -->
-      <h1 class="text-[#131313] text-4xl sm:text-5xl lg:text-6xl font-bold mb-2">
-        Pricing Plans.
-      </h1>
-      
-      <!-- Sub Heading
-      <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#069] mb-6">
-        Three ways to grow.
-      </h2>
-       -->
-      <!-- Tagline -->
-      <p class="text-xl sm:text-2xl text-gray-800 mb-4">
-        Start with collaboration. Do the work. Scale with confidence.
-      </p>
-      
-      <!-- Features List -->
-      <!-- <p class="text-base sm:text-lg text-gray-400 mb-10 max-w-3xl mx-auto font-medium">
-        Email. Meetings. Chat. Documents. Workflows. One system, hosted in Nigeria.
-      </p>
-       -->
-      <!-- Badges -->
-      <!-- <div class="flex flex-wrap justify-center gap-6 sm:gap-8">
-        <div class="flex items-center gap-2 text-[#131313]">
-          <svg class="w-5 h-5 text-[#069]" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-          </svg>
-          <span class="text-sm sm:text-base font-medium">SOC 2 compliant</span>
-        </div>
-        
-        <div class="flex items-center gap-2 text-[#131313]">
-          <svg class="w-5 h-5 text-[#069]" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
-          </svg>
-          <span class="text-sm sm:text-base font-medium">Local hosting (NG)</span>
-        </div>
-        
-        <div class="flex items-center gap-2 text-[#131313]">
-          <svg class="w-5 h-5 text-[#069]" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
-          </svg>
-          <span class="text-sm sm:text-base font-medium">24/7 support</span>
-        </div>
-      </div> -->
-    </div>   
+         <!-- Plan Name -->
+         <h3 class= "text-[28px] font-bold text-[#131313] mb-2 " >{{ plan.name }} </h3 >
 
-    <!-- Main Plan: Ration Core -->
-    <!-- Billing Toggle -->
-      <div class="flex justify-center mb-12">
-        <div class="bg-white rounded-full p-1 border border-gray-300 shadow-sm inline-flex">
-          <button 
-            @click="billingPeriod = 'monthly'"
-            :class="[
-              'px-6 py-3 rounded-full text-[18px] font-medium transition-all',
-              billingPeriod === 'monthly' ? 'bg-[#131313] text-white shadow-md' : 'text-gray-500 hover:text-[#131313]'
-            ]"
-          >
-            Monthly
-          </button>
-          <button 
-            @click="billingPeriod = 'annual'"
-            :class="[
-              'px-6 py-3 rounded-full text-[18px] font-medium transition-all',
-              billingPeriod === 'annual' ? 'bg-[#131313] text-white shadow-md' : 'text-gray-500 hover:text-[#131313]'
-            ]"
-          >
-            Annual (save 2 months)
-          </button>
-        </div>
-      </div>
+         <!-- Price -->
+         <div class= "flex items-baseline mb-1 " >
+           <span class= "text-[48px] font-extrabold text-[#131313] " >
+            {{ getConvertedPrice(plan.annualPrice) }}
+           </span>
+           <span class= "text-[#616161] ml-2 text-lg " >
+            / user / year
+           </span >
+         </div >
 
-      <!-- Cards Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        
-        <!-- Card Component -->
-        <div 
-          v-for="(plan, index) in plans" 
-          :key="plan.id"
-          @click="selectedPlan = plan.id"
-          class="relative group"
-        >
-          <!-- Main Card Container -->
-          <div 
-            :class="[
-              'bg-white rounded-2xl p-8 border transition-all duration-300 flex flex-col h-full',
-              selectedPlan === plan.id 
-                ? 'border-[#069] shadow-lg' 
-                : 'border-gray-200 hover:border-gray-300 hover:shadow-md',
-              'hover:-translate-y-1'
-            ]"
-          >
-            <!-- Badges Row -->
-            <div class="flex justify-between items-start mb-4 min-h-8">
-              <span 
-                :class="[
-                  'inline-flex items-center px-4 py-1 rounded-full text-sm font-medium uppercase tracking-wide',
-                  plan.badgeType === 'entry' ? 'bg-[#F4F4F4] text-[#131313]' :
-                  plan.badgeType === 'engine' ? 'bg-[#F5F9FB] text-[#069]' :
-                  'bg-[#131313] text-white'
-                ]"
-              >
-                {{ plan.badgeType === 'engine' ? '' : '' }}{{ plan.badgeText }}
-              </span>
+         <!-- Billing Text -->
+         <p class= "text-[16px] text-[#616161] mb-5 " >
+          Billed Annually
+         </p >
 
-              <!-- <span v-if="plan.popular" class="bg-amber-100 text-amber-700 text-sm font-bold px-3 py-1 rounded-full">
-                ⭐ Most popular
-              </span> -->
-            </div>
+         <!-- Description -->
+         <p class= "text-[#616161] mb-6 text-md " >{{ plan.description }} </p >
 
-            <!-- Plan Name -->
-            <h3 class="text-[28px] font-bold text-[#131313] mb-2">{{ plan.name }}</h3>
-
-            <!-- Price -->
-            <div class="flex items-baseline mb-1">
-              <span class="text-[48px] font-extrabold text-[#131313]">
-                {{ plan.currency }}{{ (billingPeriod === 'monthly' ? plan.price : plan.annualPrice).toLocaleString() }}
-              </span>
-              <span class="text-[#616161] ml-2 text-lg">
-                /user /{{ billingPeriod === 'monthly' ? 'month' : 'year' }}
-              </span>
-            </div>
-
-            <!-- Billing Text -->
-            <p class="text-[16px] text-[#616161] mb-5">
-              {{ billingPeriod === 'monthly' ? 'Billed monthly' : 'Billed annually (save ' + plan.annualSavings.toLocaleString() + ')' }}
-            </p>
-
-            <!-- Description -->
-            <p class="text-[#616161] mb-6 text-md">{{ plan.description }}</p>
-
-            <!-- Features List -->
-            <ul class="space-y-4 mb-8 grow">
-              <li v-for="(feature, idx) in plan.features" :key="idx" class="flex items-start">
-                <!-- Icon / Bullet -->
-                <span class="shrink-0 mr-3">
-                  <!-- Grey Dot for Excluded Features -->
-                  <span v-if="feature.excluded" class="block w-2 h-2 rounded-full bg-gray-300"></span>
-                  
-                  <!-- Icons for Active Features -->
-                  <template v-else>
+         <!-- Features List -->
+         <ul class= "space-y-4 mb-8 grow " >
+           <li v-for= "(feature, idx) in plan.features " :key= "idx " class= "flex items-start " >
+             <!-- Icon / Bullet -->
+             <span class= "shrink-0 mr-3 " >
+               <!-- Grey Dot for Excluded Features -->
+               <span v-if= "feature.excluded " class= "block w-2 h-2 rounded-full bg-gray-300 " > </span >
+              
+               <!-- Icons for Active Features -->
+               <template v-else>
                     <svg v-if="feature.type === 'check'" class="text-[#069]" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                       <path d="M20.25 6.75L9.75 17.25L4.5 12" stroke="#006699" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
@@ -256,107 +227,51 @@ const plans = [
                     <svg v-else-if="feature.type === 'schart'" class="w-6 h-6 text-[#069]" fill="currentColor" viewBox="0 0 640 640">
                       <path d="M256 144C256 117.5 277.5 96 304 96L336 96C362.5 96 384 117.5 384 144L384 496C384 522.5 362.5 544 336 544L304 544C277.5 544 256 522.5 256 496L256 144zM64 336C64 309.5 85.5 288 112 288L144 288C170.5 288 192 309.5 192 336L192 496C192 522.5 170.5 544 144 544L112 544C85.5 544 64 522.5 64 496L64 336zM496 160L528 160C554.5 160 576 181.5 576 208L576 496C576 522.5 554.5 544 528 544L496 544C469.5 544 448 522.5 448 496L448 208C448 181.5 469.5 160 496 160z"/>
                     </svg>
-                  </template>
-                </span>
-                
-                <!-- Feature Text -->
-                <span 
-                  :class="[
-                    'text-[16px]',
-                    feature.excluded ? 'text-gray-400' : 'text-[#131313]'
-                  ]"
-                >
-                  {{ feature.text }}
-                </span>
-              </li>
-            </ul>
+                </template>
+             </span >
+            
+             <!-- Feature Text -->
+             <span 
+              :class= "[
+                'text-[16px]',
+                feature.excluded ? 'text-gray-400' : 'text-[#131313]'
+              ] "
+             >
+              {{ feature.text }}
+             </span >
+           </li >
+         </ul >
 
-            <!-- Limit Info Box (Conditional - for Do and Scale plans) -->
-            <div v-if="plan.limitInfo" class="bg-[#F8FBFC] rounded-lg p-3 mb-6 border border-gray-100">
-              <div class="flex gap-2 text-[15px] text-[#131313]">
-                <svg class="w-6 h-6 text-[#069] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
-                </svg>
-                <p>{{ plan.limitInfo }}</p>
-              </div>
-            </div>
+         <!-- Limit Info Box (Conditional - for Do and Scale plans) -->
+         <div v-if= "plan.limitInfo " class= "bg-[#F8FBFC] rounded-lg p-3 mb-6 border border-gray-100 " >
+           <div class= "flex gap-2 text-[15px] text-[#131313] " >
+             <svg class= "w-6 h-6 text-[#069] shrink-0 mt-0.5 " fill= "currentColor " viewBox= "0 0 20 20 " >
+               <path fill-rule= "evenodd " d= "M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z " clip-rule= "evenodd "/>
+             </svg >
+             <p >{{ plan.limitInfo }} </p >
+           </div >
+         </div >
 
-            <!-- Button -->
-            <div class="mt-auto pt-2">
-              <button 
-                :class="[
-                  'w-full py-3 px-4 rounded-lg font-semibold text-md transition-colors duration-200',
-                  selectedPlan === plan.id 
-                    ? 'bg-[#069] text-white shadow-md hover:bg-[#069]' 
-                    : 'bg-white text-[#424242] border border-gray-300 hover:bg-gray-50 hover:border-gray-400'
-                ]"
-              >
-                {{ plan.cta }}
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    
-      <!-- Fair Usage Card -->
-        <!-- <div class="bg-white rounded-2xl p-8 sm:p-10 shadow-sm border border-gray-100">
-        <div class="flex items-start gap-3 mb-4"> -->
-          <!-- Balance Scale Icon -->
-          <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor" class="w-7 h-7 text-[#069] shrink-0 mt-0.5"><path d="M384 96L512 96C529.7 96 544 110.3 544 128C544 145.7 529.7 160 512 160L398.4 160C393.2 185.8 375.5 207.1 352 217.3L352 512L512 512C529.7 512 544 526.3 544 544C544 561.7 529.7 576 512 576L128 576C110.3 576 96 561.7 96 544C96 526.3 110.3 512 128 512L288 512L288 217.3C264.5 207 246.8 185.7 241.6 160L128 160C110.3 160 96 145.7 96 128C96 110.3 110.3 96 128 96L256 96C270.6 76.6 293.8 64 320 64C346.2 64 369.4 76.6 384 96zM439.6 384L584.4 384L512 259.8L439.6 384zM512 480C449.1 480 396.8 446 386 401.1C383.4 390.1 387 378.8 392.7 369L487.9 205.8C492.9 197.2 502.1 192 512 192C521.9 192 531.1 197.3 536.1 205.8L631.3 369C637 378.8 640.6 390.1 638 401.1C627.2 445.9 574.9 480 512 480zM126.8 259.8L54.4 384L199.3 384L126.8 259.8zM.9 401.1C-1.7 390.1 1.9 378.8 7.6 369L102.8 205.8C107.8 197.2 117 192 126.9 192C136.8 192 146 197.3 151 205.8L246.2 369C251.9 378.8 255.5 390.1 252.9 401.1C242.1 445.9 189.8 480 126.9 480C64 480 11.7 446 .9 401.1z"/></svg>
-          <h3 class="text-xl sm:text-2xl font-bold text-[#131313]">
-            Fair usage — built for real teams, not abuse
-          </h3>
-        </div> -->
-
-        <!-- Description Text -->
-        <!-- <p class="text-gray-500 mb-8 leading-relaxed max-w-2xl">
-          To ensure quality service for all customers, Ration Do and Ration Scale include reasonable usage limits. These are not hard caps for normal teams — only protections against automated or abusive usage patterns.
-        </p> -->
-
-        <!-- Table -->
-        <!-- <div class="overflow-x-auto">
-          <table class="w-full text-left border-collapse">
-            <thead>
-              <tr class="bg-gray-50">
-                <th class="py-4 px-4 text-md font-semibold text-[#131313] rounded-l-lg">Feature</th>
-                <th class="py-4 px-4 text-sm font-semibold text-[#131313] text-center">Ration Do</th>
-                <th class="py-4 px-4 text-sm font-semibold text-[#131313] text-center rounded-r-lg">Ration Scale</th>
-              </tr>
-            </thead>
-            <tbody class="text-md"> -->
-              <!-- Row 1 -->
-              <!-- <tr class="border-b border-gray-200">
-                <td class="py-4 px-4 text-gray-700 font-medium">Max meeting duration</td>
-                <td class="py-4 px-4 text-gray-900 text-center">60 minutes</td>
-                <td class="py-4 px-4 text-gray-900 text-center">120 minutes</td>
-              </tr> -->
-              <!-- Row 2 -->
-              <!-- <tr class="border-b border-gray-200">
-                <td class="py-4 px-4 text-gray-700 font-medium">Max participants per meeting</td>
-                <td class="py-4 px-4 text-gray-900 text-center">25</td>
-                <td class="py-4 px-4 text-gray-900 text-center">50</td>
-              </tr> -->
-              <!-- Row 3 -->
-              <!-- <tr class="border-b border-gray-200">
-                <td class="py-4 px-4 text-gray-700 font-medium">Concurrent meetings (soft limit)</td>
-                <td class="py-4 px-4 text-gray-900 text-center">users ÷ 2</td>
-                <td class="py-4 px-4 text-gray-900 text-center">users ÷ 1.5</td>
-              </tr>
-            </tbody>
-          </table> -->
-        <!-- </div> -->
-
-        <!-- Footer Link -->
-        <!-- <p class="mt-8 text-md text-gray-400">
-          Need higher limits? 
-          <a href="#" class="text-[#069] hover:text-blue-600 hover:underline font-medium">Contact sales</a>
-          for custom capacity or dedicated infrastructure.
-        </p> -->
-
-      <!-- </div> -->
-
-    </div>
-  </section>
+         <!-- Button -->
+         <div class= "mt-auto pt-2 " >
+           <button 
+            :class= "[
+              'w-full py-3 px-4 rounded-lg font-semibold text-md transition-colors duration-200',
+              selectedPlan === plan.id 
+                ? 'bg-[#069] text-white  shadow-md hover:bg-[#069]' 
+                : 'bg-white text-[#424242] border border-gray-300 hover:bg-gray-50 hover:border-gray-400'
+            ] "
+           >
+            {{ plan.cta }}
+           </button >
+         </div >
+       </div >
+     </div >
+   </div >
+   <div class="text-[#616161] justify-center text-center max-w-4xl mx-auto mt-8">
+      <p>All prices exclude VAT where applicable. Annual plans billed upfront. Savings calculated against monthly pricing.</p>
+      <p>Fair usage limits apply to Ration Do and Ration Scale. 24/7 email support for all tiers. Priority support for Ration Scale.</p>
+   </div>
+ </div >
+</section>
 </template>
-
