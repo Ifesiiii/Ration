@@ -3,7 +3,6 @@ import Navbar from '../components/Navbar.vue';
 import Hero from '../components/Home/Hero.vue';
 import Features from '../components/Home/Features.vue';
 import Choose from '../components/Home/Choose.vue';
-import Comm from '../components/Home/Comm.vue';
 import Pricing from '../components/Home/Pricing.vue';
 import Need from '../components/Home/Need.vue';
 import Plans from '../components/Home/Plans.vue';
@@ -19,7 +18,6 @@ import Footer from '../components/Footer.vue';
     <Hero />
     <Features />
     <Choose />
-    <Comm />
     <Pricing />
     <Need />
     <Plans />
