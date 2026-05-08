@@ -64,7 +64,7 @@ const handleKeydown = (e) => {
 </script>
 
 <template>
-  <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+  <div class="fixed bottom-10 right-6 z-50 flex flex-col items-end">
 
     <!-- ── Chat Window ── -->
     <Transition name="chat-pop">

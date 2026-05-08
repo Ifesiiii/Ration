@@ -9,6 +9,8 @@ import SetupView from '../views/SetupView.vue'
 import AdminView from '../views/AdminView.vue'
 import BillingView from '../views/BillingView.vue'
 import DocsView from '../views/DocsView.vue'
+import PolicyView from '../views/PolicyView.vue'
+import NoticeView from '../views/NoticeView.vue'
 
 
 const router = createRouter({
@@ -72,6 +74,16 @@ const router = createRouter({
             path: '/docs',
             name: 'Docs',
             component: DocsView,
+        },
+        {
+            path: '/policy',
+            name: 'Policy',
+            component: PolicyView,
+        },
+        {
+            path: '/notice',
+            name: 'Notice',
+            component: NoticeView,
         }
     ],
 })

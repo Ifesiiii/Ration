@@ -1,6 +1,9 @@
 <script setup>
 import { ref, computed } from 'vue'
 
+// Billing Toggle State
+const billingPeriod = ref('monthly')
+
 // Currency State
 const selectedCurrency = ref('NGN')
 
@@ -29,9 +32,8 @@ const plans = [
 id: 'start',
 name: 'Ration Start',
 price: 2000, // Monthly base
-annualPrice: 2000,
+annualPrice: 20000,
 currency: '₦',
-annualSavings: 4000,
 badgeType: 'entry',
 badgeText: 'Entry',
 popular: false,
@@ -53,9 +55,8 @@ cta: 'Start with collaboration'
 id: 'do',
 name: 'Ration Do',
 price: 4000,
-annualPrice: 4000,
+annualPrice: 40000,
 currency: '₦',
-annualSavings: 8000,
 badgeType: 'engine',
 badgeText: 'Revenue Engine',
 popular: true,
@@ -75,9 +76,8 @@ cta: 'Do the work'
 id: 'scale',
 name: 'Ration Scale',
 price: 6000,
-annualPrice: 6000,
+annualPrice: 60000,
 currency: '₦',
-annualSavings: 12000,
 badgeType: 'enterprise',
 badgeText: 'Enterprise',
 popular: false,
@@ -96,7 +96,7 @@ cta: 'Scale with confidence'
 ]
 </script>
 <template >
- <section id= "pricing" class= "bg-gray-100 " >
+ <section id= "pricing" class= "bg-gray-100" >
  <div class= "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-30 " >   
  <!-- Header Section -->
  <div class= "max-w-5xl mx-auto text-center" >
@@ -105,7 +105,7 @@ cta: 'Scale with confidence'
 Pricing Plans.
  </h1 >
    <!-- Tagline -->
-   <p class= "text-xl sm:text-2xl text-gray-800 mb-5" >
+   <p class= "text-xl sm:text-2xl text-[#131313] mb-5" >
     Start with collaboration. Do the work. Scale with confidence.
    </p >
  </div >   
@@ -115,15 +115,39 @@ Pricing Plans.
      <div class= "flex flex-row items-center gap-3" >
        <label class= "text-[#424242]" >Select your currency:</label>
        <select 
-        v-model= "selectedCurrency "
-        class= "bg-white border border-gray-300 text-[#131313] text-lg font-medium rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-3 w-50"
+        v-model= "selectedCurrency"
+        class= "bg-white border border-[#E7E7E7] text-[#131313] text-md font-medium rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-3 w-50"
        >
-        <option v-for= "(currency, code) in currencyRates " :key= "code " :value= "code " >
+        <option v-for= "(currency, code) in currencyRates " :key= "code " :value= "code" >
          {{ currency.label }}
         </option>
        </select>
      </div>
    </div>
+
+   <!-- Billing Toggle -->
+   <div class= "flex justify-center mb-6" >
+     <div class= "bg-white rounded-full p-1 border border-gray-300 shadow-sm inline-flex" >
+       <button 
+        @click= "billingPeriod = 'monthly'"
+        :class= "[
+          'px-5 py-1 rounded-full text-[18px] font-medium transition-all',
+          billingPeriod === 'monthly' ? 'bg-[#131313] text-white shadow-md' : 'text-gray-500 hover:text-[#131313]'
+        ] "
+       >
+        Monthly
+       </button >
+       <button 
+        @click= "billingPeriod = 'annual'"
+        :class= "[
+          'px-5 py-1 rounded-full text-[18px] font-medium transition-all',
+          billingPeriod === 'annual' ? 'bg-[#131313] text-white shadow-md' : 'text-gray-500 hover:text-[#131313]'
+        ] "
+       >
+        Annual (save 2 months)
+       </button >
+     </div >
+   </div >
 
    <!-- Cards Grid -->
    <div class= "grid grid-cols-1 md:grid-cols-3 gap-6 " >
@@ -169,16 +193,16 @@ Pricing Plans.
          <!-- Price -->
          <div class= "flex items-baseline mb-1 " >
            <span class= "text-[48px] font-extrabold text-[#131313] " >
-            {{ getConvertedPrice(plan.annualPrice) }}
+            {{ getConvertedPrice(billingPeriod === 'monthly' ? plan.price : plan.annualPrice) }}
            </span>
            <span class= "text-[#616161] ml-2 text-lg " >
-            / user / year
+            / user / {{ billingPeriod === 'monthly' ? 'month' : 'year' }}
            </span >
          </div >
 
          <!-- Billing Text -->
          <p class= "text-[16px] text-[#616161] mb-5 " >
-          Billed Annually
+          {{ billingPeriod === 'monthly' ? 'Billed monthly' : 'Billed annually '  + '' }}
          </p >
 
          <!-- Description -->
