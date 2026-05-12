@@ -29,16 +29,16 @@ import { RouterLink } from 'vue-router';
             <h3 class="text-lg font-semibold mb-4">Company</h3>
             <ul class="space-y-3">
               <li>
-                <RouterLink to="/company/about" class="text-base hover:text-[#0A5C7A] transition-colors">About</RouterLink>
+                <span class="text-base hover:text-[#0A5C7A] transition-colors">About</span>
               </li>
               <li>
-                <RouterLink to="/services" class="text-base hover:text-[#0A5C7A] transition-colors">Services</RouterLink>
+                <span class="text-base hover:text-[#0A5C7A] transition-colors">Services</span>
               </li>
               <li>
-                <RouterLink to="/pricing" class="text-base hover:text-[#0A5C7A] transition-colors">Pricing plans</RouterLink>
+                <span class="text-base hover:text-[#0A5C7A] transition-colors">Pricing plans</span>
               </li>
               <li>
-                <RouterLink to="/deployment" class="text-base hover:text-[#0A5C7A] transition-colors">Deployment plans</RouterLink>
+                <span class="text-base hover:text-[#0A5C7A] transition-colors">Deployment plans</span>
               </li>
             </ul>
           </div>
@@ -48,16 +48,16 @@ import { RouterLink } from 'vue-router';
             <h3 class="text-lg font-semibold mb-4">Features</h3>
             <ul class="space-y-3">
               <li>
-                <RouterLink to="/features/mail" class="text-base hover:text-[#0A5C7A] transition-colors">Mail</RouterLink>
+                <span class="text-base hover:text-[#0A5C7A] transition-colors">Mail</span>
               </li>
               <li>
-                <RouterLink to="/features/contact" class="text-base hover:text-[#0A5C7A] transition-colors">Contact</RouterLink>
+                <span class="text-base hover:text-[#0A5C7A] transition-colors">Contact</span>
               </li>
               <li>
-                <RouterLink to="/features/chat" class="text-base hover:text-[#0A5C7A] transition-colors">Chat</RouterLink>
+                <span class="text-base hover:text-[#0A5C7A] transition-colors">Chat</span>
               </li>
               <li>
-                <RouterLink to="/features/calendar" class="text-base hover:text-[#0A5C7A] transition-colors">Calendar</RouterLink>
+                <span class="text-base hover:text-[#0A5C7A] transition-colors">Calendar</span>
               </li>
             </ul>
           </div>
@@ -67,10 +67,10 @@ import { RouterLink } from 'vue-router';
             <h3 class="text-lg font-semibold mb-4">Support</h3>
             <ul class="space-y-3">
               <li>
-                <RouterLink to="/features/mail" class="text-base hover:text-[#0A5C7A] transition-colors">FAQ</RouterLink>
+                <span class="text-base hover:text-[#0A5C7A] transition-colors">FAQ</span>
               </li>
               <li>
-                <RouterLink to="/features/contact" class="text-base hover:text-[#0A5C7A] transition-colors">Contact Us</RouterLink>
+                <span class="text-base hover:text-[#0A5C7A] transition-colors">Contact Us</span>
               </li>
             </ul>
           </div>

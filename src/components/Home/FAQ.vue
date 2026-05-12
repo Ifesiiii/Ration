@@ -112,7 +112,7 @@ const toggleFaq = (index) => {
             v-if="openIndex === 1"
             class="px-6 pb-6 text-[#131313] text-base leading-6"
           >
-            In Progress......
+            Whether you have questions about using the platform, need help troubleshooting an issue, or want to provide feedback, our dedicated support team is here to help.
           </div>
         </div>
 
@@ -157,7 +157,7 @@ const toggleFaq = (index) => {
             v-if="openIndex === 2"
             class="px-6 pb-6 text-[#131313] text-base leading-6"
           >
-            In Progress.......
+            Yes. Ration allows administrators to control user access and permissions, ensuring that only authorized personnel have access to sensitive information and features.
           </div>
         </div>
 
@@ -202,7 +202,7 @@ const toggleFaq = (index) => {
             v-if="openIndex === 3"
             class="px-6 pb-6 text-[#131313] text-base leading-6"
           >
-            In Progress.....
+            Yes. Ration provides tools and support to help you migrate your data from other collaboration platforms. Please contact our support team for assistance with the migration process.
           </div>
         </div>
 
