@@ -1,4 +1,5 @@
 <script setup>
+import { RouterLink } from 'vue-router';
 import mid from '../../assets/img/mid.png'
 import ogun from '../../assets/img/ogun.png'
 import army from '../../assets/img/army.png'
@@ -28,9 +29,11 @@ import army from '../../assets/img/army.png'
             Join Waitlist
           </button>
           </RouterLink>
+          <RouterLink to="/docs">
           <button class="bg-transparent hover:bg-white/10 text-white px-8 py-3 rounded font-semibold transition-colors duration-200">
             Learn More
           </button>
+        </RouterLink>
         </div>
       </div>
     </section>
