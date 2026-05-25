@@ -22,11 +22,11 @@ let dragStartX = 0;
 
 
 const POSITIONS = [
-  { x: -520, rotY: -55, scale: 0.62, z: -220, opacity: 0.45 }, // far left
-  { x: -270, rotY: -32, scale: 0.80, z: -110, opacity: 0.72 }, // near left
-  { x:    0, rotY:   0, scale: 1.00, z:    0, opacity: 1.00 }, // center
-  { x:  270, rotY:  32, scale: 0.80, z: -110, opacity: 0.72 }, // near right
-  { x:  520, rotY:  55, scale: 0.62, z: -220, opacity: 0.45 }, // far right
+   { x: -480, rotY: 0, scale: 0.62, z: -220, opacity: 0.50 }, // far left
+  { x: -250, rotY: 0, scale: 0.80, z: -110, opacity: 0.75 }, // near left
+  { x:    0, rotY: 0, scale: 1.00, z:    0, opacity: 1.00 }, // center
+  { x:  250, rotY: 0, scale: 0.80, z: -110, opacity: 0.75 }, // near right
+  { x:  480, rotY: 0, scale: 0.62, z: -220, opacity: 0.50 }, // far right
 ];
 
 
