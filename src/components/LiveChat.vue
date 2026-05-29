@@ -1,12 +1,13 @@
 <script setup>
-import { ref, nextTick } from 'vue';
+import { ref, nextTick, computed } from 'vue';
 
-
-const isOpen       = ref(false);
-const showDropdown = ref(false);
-const inputText    = ref('');
-const messagesEl   = ref(null);
-const fileInput    = ref(null);
+const isOpen        = ref(false);
+const showDropdown  = ref(false);
+const inputText     = ref('');
+const messagesEl    = ref(null);
+const fileInput     = ref(null);
+const isLoading     = ref(false);
+const selectedFiles = ref([]); // { file, name, size, type, previewUrl }
 
 const GREETING = "Got any questions? I'm happy to help";
 
@@ -17,6 +18,14 @@ const scrollToBottom = async () => {
   await nextTick();
   if (messagesEl.value) messagesEl.value.scrollTop = messagesEl.value.scrollHeight;
 };
+
+const formatFileSize = (bytes) => {
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+  return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+};
+
+const isImage = (type) => type.startsWith('image/');
 
 /* ── toggle / close ── */
 const toggleChat = () => {
@@ -32,18 +41,61 @@ const closeChat = () => {
 /* ── dropdown actions ── */
 const startNewChat = () => {
   messages.value = [{ role: 'assistant', content: GREETING }];
+  selectedFiles.value = [];
   showDropdown.value = false;
 };
 
-const endChat = () => closeChat();
+const endChat = () => {
+  messages.value = [{ role: 'assistant', content: GREETING }];
+  selectedFiles.value = [];
+  inputText.value = '';
+  closeChat();
+};
+
+/* ── file handling ── */
+const handleFileChange = (e) => {
+  const files = Array.from(e.target.files);
+  files.forEach((file) => {
+    const entry = {
+      file,
+      name: file.name,
+      size: file.size,
+      type: file.type,
+      previewUrl: null,
+    };
+    if (isImage(file.type)) {
+      const reader = new FileReader();
+      reader.onload = (ev) => { entry.previewUrl = ev.target.result; };
+      reader.readAsDataURL(file);
+    }
+    selectedFiles.value.push(entry);
+  });
+  // Reset so same file can be re-selected
+  e.target.value = '';
+};
+
+const removeFile = (index) => {
+  selectedFiles.value.splice(index, 1);
+};
+
+const canSend = computed(() => inputText.value.trim() || selectedFiles.value.length > 0);
 
 /* ── send message ── */
 const sendMessage = async () => {
+  if (!canSend.value || isLoading.value) return;
+
   const text = inputText.value.trim();
-  if (!text || isLoading.value) return;
+  const attachments = selectedFiles.value.map(f => ({
+    name: f.name,
+    size: f.size,
+    type: f.type,
+    previewUrl: f.previewUrl,
+  }));
 
   inputText.value = '';
-  messages.value.push({ role: 'user', content: text });
+  selectedFiles.value = [];
+
+  messages.value.push({ role: 'user', content: text, attachments });
   await scrollToBottom();
 };
 
@@ -135,8 +187,40 @@ const handleKeydown = (e) => {
             </div>
             <!-- User -->
             <div v-else class="flex justify-end">
-              <div class="bg-[#F8F8F8] text-white text-sm rounded-lg rounded-tr-sm px-4 py-2.5 max-w-[80%] leading-relaxed">
-                {{ msg.content }}
+              <div class="flex flex-col items-end gap-1.5 max-w-[80%]">
+                <!-- Attachments -->
+                <template v-if="msg.attachments && msg.attachments.length">
+                  <div
+                    v-for="(att, ai) in msg.attachments"
+                    :key="ai"
+                    class="rounded-xl overflow-hidden border border-gray-200"
+                  >
+                    <!-- Image preview -->
+                    <img
+                      v-if="att.previewUrl"
+                      :src="att.previewUrl"
+                      :alt="att.name"
+                      class="max-w-[200px] max-h-[160px] object-cover block"
+                    />
+                    <!-- Non-image file chip -->
+                    <div v-else class="bg-[#F8F8F8] flex items-center gap-2 px-3 py-2">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#003854" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/>
+                      </svg>
+                      <div>
+                        <p class="text-xs font-medium text-[#131313] leading-tight truncate max-w-[130px]">{{ att.name }}</p>
+                        <p class="text-[10px] text-gray-400">{{ formatFileSize(att.size) }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+                <!-- Text bubble -->
+                <div
+                  v-if="msg.content"
+                  class="bg-[#003854] text-white text-sm rounded-lg rounded-tr-sm px-4 py-2.5 leading-relaxed"
+                >
+                  {{ msg.content }}
+                </div>
               </div>
             </div>
           </template>
@@ -145,32 +229,85 @@ const handleKeydown = (e) => {
         </div>
 
         <!-- Input -->
-        <div class="border-t border-gray-100 px-3 py-3 flex items-center gap-2 shrink-0">
-          <input
-            v-model="inputText"
-            @keydown="handleKeydown"
-            type="text"
-            placeholder="Ask me anything..."
-            :disabled="isLoading"
-            class="flex-1 text-sm text-[#131313] placeholder-[#131313] outline-none bg-[#F8F8F8]"
-          />
-          <!-- Paperclip -->
-          <input ref="fileInput" type="file" class="hidden" />
-          <button @click="fileInput.click()" class="text-gray-400 hover:text-gray-600 transition-colors p-1">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/>
-            </svg>
-          </button>
-          <!-- Send -->
-          <button
-            @click="sendMessage"
-            :disabled="!inputText.trim()"
-            class="bg-[#003854] hover:bg-[#0A5C7A] disabled:opacity-40 disabled:cursor-not-allowed text-white rounded-lg p-2 transition-colors"
+        <div class="border-t border-gray-100 shrink-0">
+
+          <!-- Staged file previews -->
+          <div
+            v-if="selectedFiles.length"
+            class="flex flex-wrap gap-2 px-3 pt-3"
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
-            </svg>
-          </button>
+            <div
+              v-for="(f, i) in selectedFiles"
+              :key="i"
+              class="relative group flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-xl px-2 py-1.5 text-xs text-[#131313]"
+            >
+              <!-- Image thumbnail -->
+              <img
+                v-if="f.previewUrl"
+                :src="f.previewUrl"
+                class="w-8 h-8 rounded-lg object-cover shrink-0"
+              />
+              <!-- File icon -->
+              <svg v-else width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#003854" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0">
+                <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/>
+              </svg>
+              <div class="max-w-[90px]">
+                <p class="truncate font-medium leading-tight">{{ f.name }}</p>
+                <p class="text-gray-400 text-[10px]">{{ formatFileSize(f.size) }}</p>
+              </div>
+              <!-- Remove button -->
+              <button
+                @click="removeFile(i)"
+                class="ml-0.5 text-gray-300 hover:text-red-400 transition-colors leading-none"
+                aria-label="Remove file"
+              >
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+                  <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 px-3 py-3">
+            <input
+              v-model="inputText"
+              @keydown="handleKeydown"
+              type="text"
+              placeholder="Ask me anything..."
+              :disabled="isLoading"
+              class="flex-1 text-sm text-[#131313] placeholder-[#131313] outline-none bg-[#F8F8F8]"
+            />
+            <!-- Paperclip -->
+            <input
+              ref="fileInput"
+              type="file"
+              multiple
+              class="hidden"
+              @change="handleFileChange"
+            />
+            <button
+              @click="fileInput.click()"
+              :class="[
+                'transition-colors p-1',
+                selectedFiles.length ? 'text-[#003854]' : 'text-gray-400 hover:text-gray-600'
+              ]"
+              :title="selectedFiles.length ? `${selectedFiles.length} file(s) attached` : 'Attach a file'"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/>
+              </svg>
+            </button>
+            <!-- Send -->
+            <button
+              @click="sendMessage"
+              :disabled="!canSend"
+              class="bg-[#003854] hover:bg-[#0A5C7A] disabled:opacity-40 disabled:cursor-not-allowed text-white rounded-lg p-2 transition-colors"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </Transition>
