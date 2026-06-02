@@ -1,9 +1,17 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
-import { RouterLink } from 'vue-router';
+import { ref, onMounted, onUnmounted, nextTick } from 'vue';
+import { RouterLink, useRouter, useRoute } from 'vue-router';
+
+const router = useRouter();
+const route = useRoute();
 
 const isMenuOpen = ref(false);
 const activeSection = ref('home');
+
+const closeMobileMenu = () => {
+  isMenuOpen.value = false;
+};
+
 
 const navLinks = [
   { name: 'Home', path: '/', section: 'home' },
@@ -33,12 +41,25 @@ const scrollToContact = () => {
 };
 
 
-const scrollToSection = (sectionId) => {
+const scrollToSection = async (sectionId) => {
   if (!sectionId) return;
-  
+
+  if (route.path !== '/') {
+    await router.push('/');
+    await nextTick();
+
+    setTimeout(() => {
+      scrollToSection(sectionId);
+    }, 50);
+
+    closeMobileMenu();
+    return;
+  }
+
   const element = document.getElementById(sectionId);
+
   if (element) {
-    const offset = 80; 
+    const offset = 80;
     const elementPosition = element.getBoundingClientRect().top;
     const offsetPosition = elementPosition + window.pageYOffset - offset;
 
@@ -46,11 +67,13 @@ const scrollToSection = (sectionId) => {
       top: offsetPosition,
       behavior: 'smooth'
     });
-  }
-  
 
-  isMenuOpen.value = false;
+    activeSection.value = sectionId;
+  }
+
+  closeMobileMenu();
 };
+
 
 
 const handleScroll = () => {
